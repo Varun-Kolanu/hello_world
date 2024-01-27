@@ -1,7 +1,11 @@
 <template>
-  <button @click="changeFullName">Change Full Name</button>
-  <h2>Full Name: {{ firstName }} {{ lastName }}</h2>
-  <h2>Computed: {{ fullName }}</h2>
+  <h2>Volume (0-20): {{ volume }}</h2>
+  <button @click="volume += 2">Increase</button>
+  <button @click="volume -= 2">Decrease</button>
+  <input type="text" v-model="movie">
+
+  <input type="number" v-model="info.age">
+  <input type="text" v-model="info.name">
 </template>
 
 <script>
@@ -9,27 +13,33 @@ export default {
   name: 'App',
   data() {
     return {
-      firstName: 'Varun',
-      lastName: 'Kolanu'
+      volume: 0,
+      movie: 'Batman',
+      info: {
+        age: null,
+        name: ''
+      }
     };
   },
-  methods: {
-    changeFullName(value) {
-      this.fullName = "Some Random"
-    }
-  },
-  computed: {
-    fullName: {
-      get() {
-        return `${this.firstName} ${this.lastName}` 
-      },
-      set(value) {
-        const names = value.split(' ');
-        this.firstName = names[0];
-        this.lastName = names[1];
+  watch: {
+    volume(newValue, oldValue) {
+      if (newValue > oldValue && newValue === 16) {
+        alert('Increasing Volume my damage hearing')
       }
+    },
+    movie: {
+      handler(newValue) {
+        console.log(`Calling API Call with movie: ${newValue}`);
+      },
+      immediate: true // Runs on page reload too
+    },
+    info: {
+      handler(newValue) {
+        console.log(`Info: Age = ${newValue.age}, Name = ${newValue.name}`)
+      },
+      deep: true //* Generally watchers aren't called if deep properties change in an object or array. If we use .concat, and change the array itself, deep true not required as whole array got changed
     }
-  }
+  }  
 }
 </script>
 
