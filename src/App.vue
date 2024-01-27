@@ -1,16 +1,16 @@
 <template>
-  <Greet name="Varun"/>
-  <Greet name="Vishwak"/>
-  <Greet :name="name" />
-  <!-- v-bind for dynamic props -->
+  <Article title="Article Component" :likes="5" />
+  <!-- For numbers and boolean use v-bind -->
 </template>
 
 <script>
 import Greet from './components/Greet.vue';
+import Article from './components/Article.vue';
+
 export default {
   name: 'App',
   components: {
-    Greet,
+    Greet, Article
   },
   data() {
     return {
