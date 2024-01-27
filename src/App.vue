@@ -1,20 +1,27 @@
 <template>
-  <Article title="Article Component" :likes="5" id="my-article" /> 
+  <h2>App Username: {{ name }}</h2>
+  <CompA />
 </template>
 
 <script>
 import Greet from './components/Greet.vue';
 import Article from './components/Article.vue';
+import CompA from './components/CompA.vue';
 
 export default {
   name: 'App',
   components: {
-    Greet, Article
+    Greet, Article, CompA
   },
   data() {
     return {
-      name: 'Dynamic'
+      name: 'Varun'
     };
+  },
+  provide() {
+    return {
+      username: this.name
+    }
   }  
 }
 </script>
