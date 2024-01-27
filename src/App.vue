@@ -1,5 +1,8 @@
 <template>
-  <Greet />
+  <Greet name="Varun"/>
+  <Greet name="Vishwak"/>
+  <Greet :name="name" />
+  <!-- v-bind for dynamic props -->
 </template>
 
 <script>
@@ -11,7 +14,7 @@ export default {
   },
   data() {
     return {
-      
+      name: 'Dynamic'
     };
   }  
 }
