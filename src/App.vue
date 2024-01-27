@@ -1,11 +1,15 @@
 <template>
-  <div :style="{
-    color: highlightColor,
-    fontSize: fontSize + 'px',
-    border: '2px solid red'
-  }">Css binding</div>
-  <div :style="styleObject">Css Object Binding</div>
-  <div :style="[baseStyleObject, backgroundStyleObject]">Array Style</div>
+  <h2 v-if="num > 0">The num is positive</h2>
+  <h2 v-else-if="num === 0">The number is zero</h2>
+  <h2 v-else>The number is negative</h2>
+
+  <template v-if="display">  <!-- this is not rendered as a seperate div -->
+    <h2>Hi</h2>
+    <h2>Hello</h2>
+    <h2>Hey</h2>
+  </template>
+
+  <h2 v-show="show">v-show</h2>  <!-- v-show adds 'display: none' if set to false but v-if removes the element itself from the DOM -->
 </template>
 
 <script>
@@ -13,19 +17,9 @@ export default {
   name: 'App',
   data() {
     return {
-      highlightColor: 'green',
-      fontSize: 50,
-      styleObject: {
-        color: 'green',
-        fontSize: '50px',
-        border: '2px solid red'
-      },
-      baseStyleObject: {
-        color: 'green'
-      },
-      backgroundStyleObject: {
-        backgroundColor: 'lightblue'
-      }
+      num: 0,
+      display: true,
+      show: false
     };
   }
 }
