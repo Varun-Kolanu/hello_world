@@ -1,15 +1,17 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+<div> {{ greet }} {{ name }} </div>
+<div v-text="branch" ></div> <!-- replaces whole varaible of v-text into the div's inner html -->
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
 export default {
   name: 'App',
-  components: {
-    HelloWorld
+  data() {
+    return {
+      greet: "Hello",
+      name: "Varun",
+      branch: "CSE"
+    };
   }
 }
 </script>
