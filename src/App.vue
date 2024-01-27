@@ -1,63 +1,10 @@
 <template>
-  <div>
-    <pre>
-      {{ JSON.stringify(formValues, null, 2) }}
-    </pre>
-  </div>
-  <form> <!-- or by using event.preventDefault() -->
-    <div>
-      <label for="name">Name</label>
-      <input type="text" placeholder="Name" id="name" v-model.trim.lazy="formValues.name"> 
-      <!-- .trim to remove whitespaces
-      .lazy to update only on Change only-->
-    </div>
-    <div>
-      <label for="profile">Profile</label>
-      <textarea name="profile" id="profile" cols="30" rows="10" v-model="formValues.profile"></textarea>
-    </div>
-    <div>
-      <label for="country">Country</label>
-      <select name="country" id="country" v-model="formValues.country">
-        <option value="">Select</option>
-        <option value="India">India</option>
-        <option value="China">China</option>
-      </select>
-    </div>
-    <div>
-      <label for="job-location">Job Location</label>
-      <select name="job-location" id="country" multiple v-model="formValues.jobLocation">
-        <option value="India">India</option>
-        <option value="China">China</option>
-      </select>
-    </div>
-    <div>
-      <label for="major">Major?</label>
-      <input type="checkbox" id="major" v-model="formValues.major">
-    </div>
-    <div>
-      <label for="remote">Open to remote work?</label>
-      <input type="checkbox" id="remote" v-model="formValues.remote" true-value="yes" false-value="no">
-    </div>
-    <div>
-      <label for="html">Html</label>
-      <input type="checkbox" id="html" v-model="formValues.skills" value="html">
+  <h2 v-once="name">{{ name }}</h2> 
+  <!-- doesn't change after rendering once -->
+  <button @click="name = 'Haha'">Change</button>
 
-      <label for="css">CSS</label>
-      <input type="checkbox" id="css" v-model="formValues.skills" value="css">
-
-      <label for="js">JS</label>
-      <input type="checkbox" id="js" v-model="formValues.skills" value="js">
-    </div>
-
-    <div>
-      <label for="age">Age</label>
-      <input type="number" placeholder="Age" id="age" v-model="formValues.age" @keyup.enter="submitHandler">
-      <!-- or keyup.13 etc  -->
-    </div>
-
-    <!-- <button type="submit">Submit</button> -->
-  </form>
-  <button @click="formValues.name = 'Varun'">Click</button>
+  <h2 v-pre>{{ name }}</h2>
+  <!-- v-pre prevents compiling data variables -->
 </template>
 
 <script>
@@ -65,22 +12,8 @@ export default {
   name: 'App',
   data() {
     return {
-      formValues: {
-        name: '',
-        profile: '',
-        country: '',
-        jobLocation: [],
-        major: false,
-        remote: "no",
-        skills: [],
-        age: null
-      }
+      name: 'Varun'
     };
-  },
-  methods: {
-    submitHandler() {
-      console.log(this.formValues)
-    }
   }
 }
 </script>
