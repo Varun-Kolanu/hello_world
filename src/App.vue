@@ -4,10 +4,12 @@
       {{ JSON.stringify(formValues, null, 2) }}
     </pre>
   </div>
-  <form @submit.prevent="submitHandler"> <!-- or by using event.preventDefault() -->
+  <form> <!-- or by using event.preventDefault() -->
     <div>
       <label for="name">Name</label>
-      <input type="text" placeholder="Name" id="name" v-model="formValues.name"> <!-- v-model for 2 way data binding -->
+      <input type="text" placeholder="Name" id="name" v-model.trim.lazy="formValues.name"> 
+      <!-- .trim to remove whitespaces
+      .lazy to update only on Change only-->
     </div>
     <div>
       <label for="profile">Profile</label>
@@ -47,7 +49,13 @@
       <input type="checkbox" id="js" v-model="formValues.skills" value="js">
     </div>
 
-    <button type="submit">Submit</button>
+    <div>
+      <label for="age">Age</label>
+      <input type="number" placeholder="Age" id="age" v-model="formValues.age" @keyup.enter="submitHandler">
+      <!-- or keyup.13 etc  -->
+    </div>
+
+    <!-- <button type="submit">Submit</button> -->
   </form>
   <button @click="formValues.name = 'Varun'">Click</button>
 </template>
@@ -64,7 +72,8 @@ export default {
         jobLocation: [],
         major: false,
         remote: "no",
-        skills: []
+        skills: [],
+        age: null
       }
     };
   },
