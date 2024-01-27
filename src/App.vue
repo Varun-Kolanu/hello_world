@@ -1,7 +1,12 @@
 <template>
-  <h2>{{ 1 + 2 + 3 }}</h2>
-  <h2>Add method: {{ add(1,2,3) }}</h2>
-  <h2>Multiply: {{ multiplier(2,4) }}</h2>
+  <h2>{{ count }}</h2>
+  <button v-on:click="count += 1">Increment</button>
+  <button @click="decrement">Decrement</button> <!-- shorthand for v-on: is @ -->
+  <button @click="clickHandler">Click</button>
+  <button @click="clickHandler2(1,$event)">Click2</button>
+  <button @click="decrement(), clickHandler($event)">Multiple methods</button> <!-- You should call the functions if are passing multiple methods and pass $event if event is used -->
+
+
 </template>
 
 <script>
@@ -9,17 +14,19 @@ export default {
   name: 'App',
   data() {
     return {
-      
+      count: 0
     };
   },
   methods: {
-    add(a,b,c) {
-      return a+b+c
+    decrement() {
+      this.count -= 1
     },
-    multiplier: (x,y) => {
-      return x*y
+    clickHandler(event) {
+      console.log(event) //event is automatically passed if no args passed
+    },
+    clickHandler2(x,event) {
+      console.log(event) // $event needs to be passed if args passed
     }
-    // If you use arrow function, cn't use this keyword to access data
   }
 }
 </script>
