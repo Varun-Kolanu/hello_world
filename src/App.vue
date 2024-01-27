@@ -1,15 +1,10 @@
 <template>
-  <h2 v-if="num > 0">The num is positive</h2>
-  <h2 v-else-if="num === 0">The number is zero</h2>
-  <h2 v-else>The number is negative</h2>
+  <div v-for="name in names" :key="name">{{ name }}</div> <!-- creates multiple divs for each name. Similar to map in reactjs -->
+  <!-- or  -->
+  <div v-for="(name, index) in names" :key="index"> {{ index + 1 }}. {{ name }}</div>
 
-  <template v-if="display">  <!-- this is not rendered as a seperate div -->
-    <h2>Hi</h2>
-    <h2>Hello</h2>
-    <h2>Hey</h2>
-  </template>
-
-  <h2 v-show="show">v-show</h2>  <!-- v-show adds 'display: none' if set to false but v-if removes the element itself from the DOM -->
+  <div v-for="value in info" :key="value">{{ value }}</div>
+  <div v-for="(value, key, index) in info" :key="index">{{ index }}. {{ key }}: {{ value }}</div>
 </template>
 
 <script>
@@ -17,9 +12,11 @@ export default {
   name: 'App',
   data() {
     return {
-      num: 0,
-      display: true,
-      show: false
+      names: ['Varun', 'Vishwak', 'Vishnu'],
+      info: {
+        name: 'Varun',
+        age: 19
+      }
     };
   }
 }
