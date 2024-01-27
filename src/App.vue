@@ -1,10 +1,10 @@
 <template>
-  <h2 v-once="name">{{ name }}</h2> 
-  <!-- doesn't change after rendering once -->
-  <button @click="name = 'Haha'">Change</button>
-
-  <h2 v-pre>{{ name }}</h2>
-  <!-- v-pre prevents compiling data variables -->
+  <input type="text" placeholder="First Name" v-model.lazy="firstName">
+  <h2>Full Name: {{ firstName }} {{ lastName }}</h2>
+  <h2>Computed: {{ fullName }}</h2>
+  <h2>Method Call: {{ getFullName() }}</h2>
+  <input type="text" name="random" id="random" placeholder="Random UI Change" v-model="random">
+  <!-- Computed properties are cached and only recalculated when one of the involved component change. But methods are recalled whenever a change in UI occurs -->
 </template>
 
 <script>
@@ -12,8 +12,22 @@ export default {
   name: 'App',
   data() {
     return {
-      name: 'Varun'
+      firstName: 'Varun',
+      lastName: 'Kolanu',
+      random: ''
     };
+  },
+  methods: {
+    getFullName() {
+      console.log("Method Called")
+      return `${this.firstName} ${this.lastName}`
+    }
+  },
+  computed: {
+    fullName() {
+      console.log("Computed called")
+      return `${this.firstName} ${this.lastName}` 
+    }
   }
 }
 </script>
