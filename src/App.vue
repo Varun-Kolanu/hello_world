@@ -1,6 +1,5 @@
 <template>
-  <Article title="Article Component" :likes="5" />
-  <!-- For numbers and boolean use v-bind -->
+  <Article title="Article Component" :likes="5" id="my-article" /> 
 </template>
 
 <script>
