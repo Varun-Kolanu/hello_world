@@ -1,28 +1,27 @@
 <template>
-  <h2>App Username: {{ name }}</h2>
-  <CompA />
+  <button @click="showPopup = true">Show Popup</button>
+  <Popup v-show="showPopup" @close="closePopup"/>
 </template>
 
 <script>
-import Greet from './components/Greet.vue';
-import Article from './components/Article.vue';
-import CompA from './components/CompA.vue';
+import Popup from "./components/Popup.vue"
 
 export default {
   name: 'App',
   components: {
-    Greet, Article, CompA
+    Popup
   },
   data() {
     return {
-      name: 'Varun'
+      showPopup: false
     };
   },
-  provide() {
-    return {
-      username: this.name
+  methods: {
+    closePopup(name) {
+      this.showPopup = false;
+      console.log(`${name} closed this`)
     }
-  }  
+  }
 }
 </script>
 
