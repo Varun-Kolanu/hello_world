@@ -1,15 +1,11 @@
 <template>
-<div v-bind:id="heading">Heading</div> <!-- binds variable to an attribute such as id, disabled -->
-<button :disabled="isDisabled">Bind</button> <!-- shorthand for v-bind -->
-<h2 :class="status">Status</h2>
-<h2 :class="isPromoted && 'promoted'">Promoted</h2>
-<h2 :class="isSoldOut ? 'sold-out' : 'exists'">Sold Out ?</h2>
-<h2 :class="[isPromoted && 'promoted', isSoldOut ? 'sold-out' : 'exists']">Array Conditional</h2>
-<h2 :class="{
-  promoted: isPromoted,
-  exists: !isSoldOut,
-  'sold-out': isSoldOut
-}">Object binding</h2>
+  <div :style="{
+    color: highlightColor,
+    fontSize: fontSize + 'px',
+    border: '2px solid red'
+  }">Css binding</div>
+  <div :style="styleObject">Css Object Binding</div>
+  <div :style="[baseStyleObject, backgroundStyleObject]">Array Style</div>
 </template>
 
 <script>
@@ -17,14 +13,19 @@ export default {
   name: 'App',
   data() {
     return {
-      greet: "Hello",
-      name: "Varun",
-      branch: "<b>CSE</b>",
-      heading: "heading",
-      isDisabled: true,
-      status: "success",
-      isPromoted: true,
-      isSoldOut: false
+      highlightColor: 'green',
+      fontSize: 50,
+      styleObject: {
+        color: 'green',
+        fontSize: '50px',
+        border: '2px solid red'
+      },
+      baseStyleObject: {
+        color: 'green'
+      },
+      backgroundStyleObject: {
+        backgroundColor: 'lightblue'
+      }
     };
   }
 }
@@ -38,21 +39,5 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
-}
-
-.success {
-  background-color: green;
-}
-
-.promoted {
-  background-color: lightblue;
-}
-
-.sold-out {
-  color: red;
-}
-
-.exists {
-  color: green;
 }
 </style>
