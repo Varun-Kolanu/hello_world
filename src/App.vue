@@ -1,6 +1,6 @@
 <template>
 <div> {{ greet }} {{ name }} </div>
-<div v-text="branch" ></div> <!-- replaces whole varaible of v-text into the div's inner html -->
+<div v-html="branch"></div> <!-- replaces whole html of v-html into the div's inner html and be cautious -->
 </template>
 
 <script>
@@ -10,7 +10,7 @@ export default {
     return {
       greet: "Hello",
       name: "Varun",
-      branch: "CSE"
+      branch: "<b>CSE</b>"
     };
   }
 }
