@@ -1,10 +1,7 @@
 <template>
-  <input type="text" placeholder="First Name" v-model.lazy="firstName">
+  <button @click="changeFullName">Change Full Name</button>
   <h2>Full Name: {{ firstName }} {{ lastName }}</h2>
   <h2>Computed: {{ fullName }}</h2>
-  <h2>Method Call: {{ getFullName() }}</h2>
-  <input type="text" name="random" id="random" placeholder="Random UI Change" v-model="random">
-  <!-- Computed properties are cached and only recalculated when one of the involved component change. But methods are recalled whenever a change in UI occurs -->
 </template>
 
 <script>
@@ -13,20 +10,24 @@ export default {
   data() {
     return {
       firstName: 'Varun',
-      lastName: 'Kolanu',
-      random: ''
+      lastName: 'Kolanu'
     };
   },
   methods: {
-    getFullName() {
-      console.log("Method Called")
-      return `${this.firstName} ${this.lastName}`
+    changeFullName(value) {
+      this.fullName = "Some Random"
     }
   },
   computed: {
-    fullName() {
-      console.log("Computed called")
-      return `${this.firstName} ${this.lastName}` 
+    fullName: {
+      get() {
+        return `${this.firstName} ${this.lastName}` 
+      },
+      set(value) {
+        const names = value.split(' ');
+        this.firstName = names[0];
+        this.lastName = names[1];
+      }
     }
   }
 }
