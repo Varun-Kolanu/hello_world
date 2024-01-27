@@ -1,10 +1,13 @@
 <template>
-  <div v-for="name in names" :key="name">{{ name }}</div> <!-- creates multiple divs for each name. Similar to map in reactjs -->
-  <!-- or  -->
-  <div v-for="(name, index) in names" :key="index"> {{ index + 1 }}. {{ name }}</div>
+  <!-- should not mix v-if with v-for because v-if is computed before v-for. So use template tag -->
 
-  <div v-for="value in info" :key="value">{{ value }}</div>
-  <div v-for="(value, key, index) in info" :key="index">{{ index }}. {{ key }}: {{ value }}</div>
+  <!-- Wrong: -->
+  <!-- <div v-for="name in names" :key="name" v-if="name === 'Varun'">{{ name }}</div> -->
+
+  <!-- Correct: -->
+  <template v-for="name in names" :key="name" >
+    <div v-if="name === 'Varun'">{{ name }}</div>
+  </template>
 </template>
 
 <script>
@@ -12,11 +15,7 @@ export default {
   name: 'App',
   data() {
     return {
-      names: ['Varun', 'Vishwak', 'Vishnu'],
-      info: {
-        name: 'Varun',
-        age: 19
-      }
+      
     };
   }
 }
